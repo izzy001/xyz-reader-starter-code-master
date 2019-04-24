@@ -141,10 +141,16 @@ public class ArticleDetailFragment extends android.support.v4.app.Fragment imple
                 .setText("Some sample text")
                 .getIntent(), getString(R.string.action_share))));
         mBodyView.setTypeface(Typeface.createFromAsset(getResources().getAssets(), "Rosario-Regular.ttf"));
-        window = getActivity().getWindow();
+        window = Objects.requireNonNull(getActivity()).getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         bindViews();
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Objects.requireNonNull(getActivity()).supportFinishAfterTransition();
+            }
+        });
         return mRootView;
     }
 
@@ -254,4 +260,6 @@ public class ArticleDetailFragment extends android.support.v4.app.Fragment imple
         mCursor = null;
         bindViews();
     }
+
+
 }
